@@ -26,7 +26,11 @@ services:
       npm run build
     startCommand: |
       cd frontend
-      npm start
+      serve -s build
     envVars:
       - key: REACT_APP_API_URL
-        value: https://patient-cohort-simulator-backend.onrender.com 
+        value: https://patient-cohort-simulator-backend.onrender.com
+      - key: NODE_VERSION
+        value: 16.14.0
+    healthCheckPath: /
+    autoDeploy: true 
