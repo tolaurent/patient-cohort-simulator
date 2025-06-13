@@ -19,7 +19,10 @@ app = FastAPI(title="Patient Cohort Simulator")
 # Enable CORS with more specific options
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React development server
+    allow_origins=[
+        "http://localhost:3000",  # Local development
+        "https://patient-cohort-simulator-frontend.onrender.com"  # Deployed frontend
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

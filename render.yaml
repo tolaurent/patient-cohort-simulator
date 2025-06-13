@@ -1,0 +1,32 @@
+services:
+  # Backend service
+  - type: web
+    name: patient-cohort-simulator-backend
+    env: python
+    buildCommand: |
+      cd backend
+      python -m venv venv
+      source venv/bin/activate
+      pip install -r requirements.txt
+    startCommand: |
+      cd backend
+      source venv/bin/activate
+      uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+
+  # Frontend service
+  - type: web
+    name: patient-cohort-simulator-frontend
+    env: node
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+    startCommand: |
+      cd frontend
+      npm start
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://patient-cohort-simulator-backend.onrender.com 
